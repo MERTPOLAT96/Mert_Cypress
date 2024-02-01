@@ -1,30 +1,22 @@
-import { test} from '@playwright/test';
-import Home from '../Pages/HomePage';
+import { test} from '../Fixtures/Fixtures';
 import * as data from '..\\TestData\\data.json'
-import LoggedIn from '../Pages/LoggedInPage';
-import Login from '../Pages/LoginPage';
 
 
 
-test.beforeEach(async({page,baseURL})=>{
-
-    const home=new Home(page);
+test.beforeEach(async({page,baseURL,home})=>{
 
     await home.navigateToTheSite(`${baseURL}`);
 })
 
-test("Page accessibility test",async({page,baseURL})=>{
+test("Page accessibility test",async({page,baseURL,home})=>{
 
-    const home=new Home(page);
 
     await home.verifyTheaccessibility(data.url)
 })
 
-test("Login test with right credentials",async({page})=>{
+test("Login test with right credentials",async({page,home,login,loggedIn})=>{
 
-    const home=new Home(page);
-    const login=new Login(page);
-    const loggedIn=new LoggedIn(page);
+    
 
     await home.clickLoginButton();
     await login.fillTheUsername(data.username)
